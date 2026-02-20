@@ -4,7 +4,7 @@ const App = () => {
   const [posts, setposts] = useState([])
   const [loading, setloading] = useState(false)
   let fetchdata = async () => {
-    let url = `https://jsonplaceholder.typicode.com/posts`
+    let url = `https://jsonplaceholder.typicode.com/posts?_limit=5`
     setloading(true)
     let data = await fetch(url)
     let res = await data.json()
@@ -14,13 +14,12 @@ const App = () => {
   let handleDelete = async (id) => {
 
     let data = posts.filter(elem => {
- return elem.id !== id
+      return elem.id !== id
 
-}
+    })
 
-)
-setposts(data)
-// console.log(data) 
+    setposts(data)
+    // console.log(data) 
 
   }
   useEffect(() => {
@@ -32,13 +31,18 @@ setposts(data)
 '> <p className='text-2xl'>Loading...</p> </div> :
       //  ff
       <div>
+        <div className='flex justify-end px-4 py-6'>
 
+          <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition duration-300 ease-in-out">
+            Create Post
+          </button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
           {posts.map((elem, index) => {
-            if (index >= 5) {
-              return
-            }
-            else {
+            // if (index >= 5) {
+            //   return
+            // }
+            // else {
             return <div
               key={elem.id}
               className="bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition duration-300"
@@ -61,7 +65,7 @@ setposts(data)
                 </button>
               </div>
             </div>
-            }
+            // }
           })}
         </div>
       </div>
