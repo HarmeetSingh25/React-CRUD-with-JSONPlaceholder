@@ -46,11 +46,6 @@ const App = () => {
       <div>
         <div className='flex flex-col items-end justify-end px-4 py-6 '>
           <div className=' flex justify-between w-screen px-10'>
-            {/* <button onClick={() => setcreateposttoggle(false)}
-              className="text-white p-2 rounded-full shadow-md transition duration-300 ease-in-out"
-            >
-              ❌
-            </button> */}
             <button onClick={() => {
 
               setcreateposttoggle(true)
