@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Createpost from './component/Createpost'
+import EditFrom from './component/EditFrom'
 
 const App = () => {
   const [posts, setposts] = useState([])
   const [loading, setloading] = useState(false)
   const [createposttoggle, setcreateposttoggle] = useState(false)
   const [editpost, seteditpost] = useState(null)
+  const [ediTtittle, setediTtittle] = useState(null)
+  const [editbody, seteditbody] = useState(null)
+  const [updatedpost, setupdatedpost] = useState([])
+  const [editposttoggle, seteditposttoggle] = useState(false)
   let fetchdata = async () => {
     let url = `https://jsonplaceholder.typicode.com/posts?_limit=5`
     setloading(true)
@@ -28,15 +33,22 @@ const App = () => {
     // console.log(data) 
 
   }
-  
+
   let Updatehandler = (id) => {
-    let found = posts.find(post => post.id === id)
-    seteditpost(found)
+    let found = posts?.find(post => post.id === id)
+    let otherpost = posts?.filter(p => { if (p.id != id) return p } )
+    console.log(otherpost);
+
+    setupdatedpost(otherpost)
+    // console.log(found);
+    seteditposttoggle(true)
+
+    // console.log(updatedpost);
 
   }
+
   useEffect(() => {
     fetchdata()
-    //  console.log(editpost);
   }, [])
   console.log(posts);
   return (
@@ -82,6 +94,7 @@ const App = () => {
                   <button onClick={() => Updatehandler(elem.id)} className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition">
                     Update
                   </button>
+                   
                   <button onClick={() => handleDelete(elem.id)} className="bg-red-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-600 transition">
                     Delete
                   </button>
@@ -96,5 +109,6 @@ const App = () => {
 
   )
 }
+
 
 export default App

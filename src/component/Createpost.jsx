@@ -14,7 +14,7 @@ const Createpost = ({ posts, setposts, setcreateposttoggle }) => {
 
         let result = await res.json();
 
-        setposts(prev => [...prev, {...result ,  id : nanoid()}])
+        setposts(prev => [...prev, { ...result, id: nanoid() }])
         setcreateposttoggle(false)
 
 
